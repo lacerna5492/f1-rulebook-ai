@@ -49,6 +49,17 @@ bash scripts/netlify-build.sh
 npx serve site        # or: python3 -m http.server -d site
 ```
 
+## Offline version (double-click index.html)
+
+`scripts/build_portable.py` builds a folder with `index.html` and a `files/` folder that runs straight from your computer, with no server and no internet.
+
+- Browsers block `fetch()` and module imports for pages opened from the file system, so each asset (runtime, models, rule data) is stored as a plain `.js` file holding the bytes in base64.
+- `index.html` loads those files with ordinary `<script>` tags and hands them to transformers.js from memory.
+
+```bash
+python3 scripts/build_portable.py F1-Rulebook-Assistant   # after netlify-build.sh
+```
+
 ## Limits
 
 - These are small extractive models. They copy an answer from the rule text and do not reason across several articles.
