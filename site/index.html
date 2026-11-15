@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F1 Rulebook Assistant</title>
-<meta name="description" content="Ask questions about the 2026 FIA Formula 1 Sporting Regulations. Two small AI models run entirely in your browser.">
+<meta name="description" content="Ask questions about the 2026 FIA Formula 1 regulations. Small AI models run entirely in your browser.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,9 +17,9 @@
 
 <main class="wrap">
   <section class="hero">
-    <h1>Ask the 2026 F1 Sporting Regulations</h1>
-    <p class="lede">Type a question in plain English. The app finds the matching articles in the official FIA rulebook and highlights the answer.
-      Both AI models run <strong>entirely in your browser</strong>: no server, no account, nothing you type leaves your device.</p>
+    <h1>Ask the 2026 F1 Rulebook</h1>
+    <p class="lede">Type a question in plain English. The app finds the matching articles in the official FIA regulations (Section A, General, and Section B, Sporting) and an AI model writes the answer with the article it came from.
+      All three AI models run <strong>entirely in your browser</strong>: no server, no account, nothing you type leaves your device.</p>
   </section>
 
   <form id="ask" class="ask" autocomplete="off">
@@ -36,15 +36,16 @@
   <section class="how">
     <h2>How it works</h2>
     <ol>
-      <li><strong>Find the rules.</strong> A small sentence-embedding model (<code>Xenova/all-MiniLM-L6-v2</code>, 23 MB) turns your question into a vector and compares it with every article of the rulebook to find the closest matches by meaning, not keywords.</li>
-      <li><strong>Find the answer.</strong> A question-answering model (<code>Xenova/distilbert-base-cased-distilled-squad</code>, 66 MB) reads the best matches and picks out the exact words that answer your question.</li>
+      <li><strong>Find the rules.</strong> A sentence-embedding model (<code>all-MiniLM-L6-v2</code>, 23 MB) compares your question with all 698 rule passages by meaning, blended with a keyword search that knows F1 slang (e.g. "DRS", "red flag", "Grand Prix").</li>
+      <li><strong>Rank them.</strong> A cross-encoder (<code>ms-marco-MiniLM-L-6-v2</code>, 23 MB) reads your question together with each of the top 20 candidates and re-orders them.</li>
+      <li><strong>Write the answer.</strong> A small language model (<code>LFM2-1.2B</code>, 4-bit) reads the 3 best rules and writes a short answer that cites the article. It runs on your graphics card through WebGPU (Chrome or Edge on a desktop or laptop); without WebGPU the app still finds the matching rules.</li>
       <li><strong>All local.</strong> The models, the rule text and the transformers.js runtime are part of this site. After the first load they are cached by your browser.</li>
     </ol>
   </section>
 </main>
 
 <footer class="wrap foot">
-  <p>Source: <a id="source-link" href="#" target="_blank" rel="noopener">FIA 2026 F1 Regulations, Section B [Sporting]</a>, © Fédération Internationale de l'Automobile.
+  <p>Sources: <span id="sources">FIA 2026 F1 Regulations, Sections A and B</span>, © Fédération Internationale de l'Automobile.
     Unofficial study tool built for CAI2300C (Miami Dade College); always check the official document. Not affiliated with the FIA or Formula 1.</p>
 </footer>
 
