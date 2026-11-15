@@ -20,40 +20,40 @@ OUT = pathlib.Path(sys.argv[1]).resolve()
 shutil.rmtree(OUT, ignore_errors=True)
 (OUT / 'files').mkdir(parents=True)
 
-MODELS = ['Xenova/all-MiniLM-L6-v2', 'Xenova/distilbert-base-cased-distilled-squad']
-MODEL_FILES = ['config.json', 'tokenizer.json', 'tokenizer_config.json', 'special_tokens_map.json',
-               'onnx/model_quantized.onnx']
-ASSETS = ['lib/transformers.min.js', 'lib/ort-wasm-simd-threaded.jsep.mjs', 'lib/ort-wasm-simd-threaded.jsep.wasm',
-          'data/passages.json', 'data/embeddings.bin'] + [f'models/{m}/{f}' for m in MODELS for f in MODEL_FILES]
+# Every file the web version serves: runtime, rule data and models
+ASSETS = sorted(str(f.relative_to(SITE)) for d in ('lib', 'data', 'models') for f in (SITE / d).rglob('*') if f.is_file())
+CHUNK = 40_000_000   # bytes per piece: keeps each base64 string far below browser string limits
 
-# Group small files together; each large binary gets its own .js file
-bundles = {'runtime.js': [], 'rulebook-data.js': [], 'model-embeddings.js': [], 'model-qa.js': []}
+# Small files share one script; large files are split into pieces across several scripts
+scripts, small = [], []
 for a in ASSETS:
-    if a.startswith('lib/'):
-        bundles['runtime.js'].append(a)
-    elif a.startswith('data/'):
-        bundles['rulebook-data.js'].append(a)
-    elif 'MiniLM' in a:
-        bundles['model-embeddings.js'].append(a)
-    else:
-        bundles['model-qa.js'].append(a)
-
-for name, files in bundles.items():
-    with open(OUT / 'files' / name, 'w') as f:
-        f.write('window.F1_ASSETS = window.F1_ASSETS || {};\n')
-        for a in files:
-            f.write(f'F1_ASSETS["{a}"] = "{base64.b64encode((SITE / a).read_bytes()).decode()}";\n')
+    data = (SITE / a).read_bytes()
+    if len(data) < 2_000_000:
+        small.append((a, data))
+        continue
+    stem = re.sub(r'[^A-Za-z0-9]+', '-', a.split('/', 1)[-1]).strip('-')[-60:]
+    for n, start in enumerate(range(0, len(data), CHUNK)):
+        name = f'{stem}-{n + 1:02d}.js'
+        with open(OUT / 'files' / name, 'w') as f:
+            f.write('window.F1_ASSETS = window.F1_ASSETS || {};\n')
+            f.write(f'(F1_ASSETS["{a}"] = F1_ASSETS["{a}"] || []).push("{base64.b64encode(data[start:start + CHUNK]).decode()}");\n')
+        scripts.append(name)
+with open(OUT / 'files' / 'small-files.js', 'w') as f:
+    f.write('window.F1_ASSETS = window.F1_ASSETS || {};\n')
+    for a, data in small:
+        f.write(f'F1_ASSETS["{a}"] = ["{base64.b64encode(data).decode()}"];\n')
+scripts.insert(0, 'small-files.js')
 
 # ---- index.html: same page, styles inlined, assets loaded with classic script tags
 html = (SITE / 'index.html').read_text()
 css = (SITE / 'style.css').read_text()
 engine = re.sub(r'^export ', '', (SITE / 'engine.js').read_text(), flags=re.M)
 app = (SITE / 'app.js').read_text()
-app = app.replace("import { pipeline, env } from './lib/transformers.min.js';\n", '')
+app = re.sub(r"^import \{[^}]*\} from './lib/transformers.min.js';\n", '', app, flags=re.M)
 app = app.replace("import { buildIndex, rank } from './engine.js';\n", '')
 app = app.replace("env.backends.onnx.wasm.wasmPaths = new URL('./lib/', location.href).href;",
-                  "env.backends.onnx.wasm.wasmPaths = { mjs: assetUrl('lib/ort-wasm-simd-threaded.jsep.mjs', 'text/javascript'),\n"
-                  "                                     wasm: assetUrl('lib/ort-wasm-simd-threaded.jsep.wasm', 'application/wasm') };\n"
+                  "env.backends.onnx.wasm.wasmPaths = { mjs: assetUrl('lib/ort-wasm-simd-threaded.asyncify.mjs', 'text/javascript'),\n"
+                  "                                     wasm: assetUrl('lib/ort-wasm-simd-threaded.asyncify.wasm', 'application/wasm') };\n"
                   "env.useBrowserCache = false;   // the files are already on this computer")
 assert 'import ' not in app.split('\n', 3)[1] and 'assetUrl' in app
 
@@ -63,11 +63,16 @@ const TYPES = { js: 'text/javascript', mjs: 'text/javascript', wasm: 'applicatio
 const cache = new Map();
 function assetBytes(key) {
   if (!cache.has(key)) {
-    const bin = atob(window.F1_ASSETS[key]);
-    const bytes = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const pieces = window.F1_ASSETS[key].map((b64) => {     // each file may be split into several base64 pieces
+      const bin = atob(b64), out = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+      return out;
+    });
+    const bytes = new Uint8Array(pieces.reduce((n, p) => n + p.length, 0));
+    let off = 0;
+    for (const p of pieces) { bytes.set(p, off); off += p.length; }
     cache.set(key, bytes);
-    delete window.F1_ASSETS[key];
+    delete window.F1_ASSETS[key];   // free the text copy
   }
   return cache.get(key);
 }
@@ -81,13 +86,13 @@ window.fetch = async (input, init) => {
   const type = TYPES[key.split('.').pop()] || 'application/octet-stream';
   return new Response(bytes, { status: 200, headers: { 'Content-Type': type, 'Content-Length': String(bytes.length) } });
 };
-const { pipeline, env } = await import(assetUrl('lib/transformers.min.js', 'text/javascript'));
+const { pipeline, env, AutoTokenizer, AutoModelForSequenceClassification, TextStreamer } = await import(assetUrl('lib/transformers.min.js', 'text/javascript'));
 """
 
-scripts = '\n'.join(f'<script src="files/{n}"></script>' for n in bundles)
+script_tags = '\n'.join(f'<script src="files/{n}"></script>' for n in scripts)
 html = html.replace('<link rel="stylesheet" href="style.css">', f'<style>\n{css}</style>')
 html = html.replace('<script type="module" src="app.js"></script>',
-                    f'{scripts}\n<script type="module">\n{bootstrap}\n{engine}\n{app}\n</script>')
+                    f'{script_tags}\n<script type="module">\n{bootstrap}\n{engine}\n{app}\n</script>')
 html = html.replace('<title>F1 Rulebook Assistant</title>', '<title>F1 Rulebook Assistant (offline)</title>')
 html = html.replace('After the first load they are cached by your browser.',
                     'This copy runs from your own computer: double-click <code>index.html</code>, no internet or server needed.')
@@ -95,7 +100,7 @@ html = html.replace('After the first load they are cached by your browser.',
 (OUT / 'README.txt').write_text(
     'F1 Rulebook Assistant (offline version)\n\n'
     'Double-click index.html to open it in your browser. Keep index.html and the files folder together.\n'
-    'Everything (the two AI models, the transformers.js runtime and the rulebook) is inside the files folder,\n'
+    'Everything (the AI models, the transformers.js runtime and the rulebook) is inside the files folder,\n'
     'so it works with no internet connection and no web server.\n\n'
     'Online version: https://f1-rulebook-ai.netlify.app\n'
     'Source code: https://github.com/lacerna5492/f1-rulebook-ai\n')
