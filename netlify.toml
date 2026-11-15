@@ -1,0 +1,20 @@
+[build]
+  command = "bash scripts/netlify-build.sh"
+  publish = "site"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Models and runtime never change for a given build, so let browsers cache them
+[[headers]]
+  for = "/models/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/lib/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"

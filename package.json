@@ -1,0 +1,8 @@
+{
+  "name": "f1-rulebook-ai",
+  "private": true,
+  "type": "module",
+  "description": "Ask the 2026 FIA F1 Sporting Regulations. Two small AI models run entirely in the browser with transformers.js.",
+  "scripts": { "build": "bash scripts/netlify-build.sh" },
+  "dependencies": { "@huggingface/transformers": "3.7.6" }
+}
