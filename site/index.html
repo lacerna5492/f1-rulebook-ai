@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F1 Rulebook Assistant</title>
+<meta name="description" content="Ask questions about the 2026 FIA Formula 1 Sporting Regulations. Two small AI models run entirely in your browser.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand"><span class="flag" aria-hidden="true"></span><span>F1 Rulebook Assistant</span></div>
+    <span class="badge" id="status" role="status">Loading AI models…</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Ask the 2026 F1 Sporting Regulations</h1>
+    <p class="lede">Type a question in plain English. The app finds the matching articles in the official FIA rulebook and highlights the answer.
+      Both AI models run <strong>entirely in your browser</strong>: no server, no account, nothing you type leaves your device.</p>
+  </section>
+
+  <form id="ask" class="ask" autocomplete="off">
+    <label for="q" class="sr-only">Your question</label>
+    <input id="q" name="q" type="text" placeholder="e.g. How many power units can a driver use?" maxlength="300" disabled>
+    <button id="go" type="submit" disabled>Ask</button>
+  </form>
+  <div class="chips" id="examples" aria-label="Example questions"></div>
+
+  <div class="progress" id="progress" hidden><div class="bar" id="bar"></div><span id="progress-text"></span></div>
+
+  <section id="results" aria-live="polite"></section>
+
+  <section class="how">
+    <h2>How it works</h2>
+    <ol>
+      <li><strong>Find the rules.</strong> A small sentence-embedding model (<code>Xenova/all-MiniLM-L6-v2</code>, 23 MB) turns your question into a vector and compares it with every article of the rulebook to find the closest matches by meaning, not keywords.</li>
+      <li><strong>Find the answer.</strong> A question-answering model (<code>Xenova/distilbert-base-cased-distilled-squad</code>, 66 MB) reads the best matches and picks out the exact words that answer your question.</li>
+      <li><strong>All local.</strong> The models, the rule text and the transformers.js runtime are part of this site. After the first load they are cached by your browser.</li>
+    </ol>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p>Source: <a id="source-link" href="#" target="_blank" rel="noopener">FIA 2026 F1 Regulations, Section B [Sporting]</a>, © Fédération Internationale de l'Automobile.
+    Unofficial study tool built for CAI2300C (Miami Dade College); always check the official document. Not affiliated with the FIA or Formula 1.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
