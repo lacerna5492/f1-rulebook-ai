@@ -1,0 +1,30 @@
+Q: How fast can drivers go in the pit lane?
+   want B1.6.3 80km/h | ctx B1.6.3 B5.7.3 B5.2.2 | 21933 ms
+   A: Drivers cannot reverse in the pit lane under their own power. Drivers must proceed to the pit lane exit at a constant speed and with constant throttle.
+Q: How many power units does each driver get for the season?
+   want B8.2.2 3 | ctx B8.2.3 B8.2.2 B8.2.8 | 18241 ms
+   A: Each driver gets up to 9 power units per season [B8.2.3].
+Q: How many turbochargers can a driver use?
+   want B8.2.2 3 | ctx B8.2.2 B1.7.1 B6.3.4 | 13557 ms
+   A: a. 3 turbochargers (TC)
+Q: How long is a Grand Prix allowed to last?
+   want B2.5.3 two | ctx B2.4.2 B1.6.2 B1.1.3 | 12867 ms
+   A: Not covered in these rules.
+Q: How far is a sprint race?
+   want B2.3.2 100km | ctx B2.3.2 B2.2.1 B2.5.2 | 18666 ms
+   A: A sprint race distance is equal to the least number of complete laps that exceed 305 km, except for specific circumstances related to safety cars. [B2.5.2]
+Q: How many cars get knocked out in Q1?
+   want B2.4.2 six | ctx B2.4.3 B2.4.2 B2.2.3 | 14128 ms
+   A: five (5)
+Q: What percentage of the race distance must a car complete to be classified?
+   want B2.5.5/B2.3.5 90% | ctx B2.5.5 A2.2.1 B2.3.5 | 18243 ms
+   A: 90%
+Q: What is the penalty for not using two different tyre compounds?
+   want B6.3.6 disqualification | ctx B6.3.6 B6.3.1 B6.3.7 | 22451 ms
+   A: Thirty (30) seconds will be added to the elapsed time of any driver who did not, when required to do so, use at least two (2) specifications of dry-weather tyre during the Race.
+Q: How many sets of soft tyres does a driver get?
+   want B6.2.4  | ctx B6.2.4 B6.3.4 B6.3.9 | 12988 ms
+   A: 2
+Q: What penalty does a driver get for entering a closed pit lane during the race?
+   want B1.6.4 Stop-and-Go | ctx B1.6.4 B1.9.5 B1.6.3 | 23576 ms
+   A: A driver gets a five-second time penalty ("5-Second Penalty") if they enter the closed pit lane without justifiable reason during a TTCS.

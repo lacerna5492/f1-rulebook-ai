@@ -1,0 +1,138 @@
+Q: How fast can drivers go in the pit lane?
+   want B1.6.3 80km/h | ctx B1.6.3 B5.7.3 B5.2.2 | 12216 ms
+   A: Drivers can go at a speed of 80km/h in the Pit Lane during the whole Competition, but this limit may be amended by the Race Director.
+Q: What's the speed limit when driving through the pits?
+   want B1.6.3 80km/h | ctx B1.6.3 B5.6.2 B5.10.3 | 8077 ms
+   A: The speed limit when driving through the pits is 80km/h, as stated in [B1.6.3].
+Q: How many power units does each driver get for the season?
+   want B8.2.2 3 | ctx B8.2.3 B8.2.2 B8.2.8 | 19785 ms
+   A: Each driver is permitted to use an additional unit for each of the Power Unit elements listed in Article B8.2.2 a. to g. in the following conditions, but the exact number of units per element isn't specified in the provided rules. The rules state that each driver may use no more than 3 engines (ICE) and 3 turbochargers (TC), but do not specify the maximum number of each Power Unit element
+Q: How many turbochargers can a driver use?
+   want B8.2.2 3 | ctx B8.2.2 B1.7.1 B6.3.4 | 9411 ms
+   A: A driver can use 3 turbochargers [B6.3.4].
+Q: How many different drivers can a team race with in one season?
+   want B1.7.1 four | ctx B1.7.1 B1.4.2 A2.1.3 | 5030 ms
+   A: A team can race with a maximum of four (4) drivers in one season.
+Q: How long is a Grand Prix allowed to last?
+   want B2.5.3 two | ctx B2.4.2 B1.6.2 B1.1.3 | 10503 ms
+   A: The Grand Prix is allowed to last for a minimum of 2 hours, as stated in [B1.6.2] [B1.1.3].
+Q: How far is a sprint race?
+   want B2.3.2 100km | ctx B2.3.2 B2.2.1 B2.5.2 | 9059 ms
+   A: The distance of a sprint race is equal to the least number of complete laps which exceed a distance of 305km, with exceptions for starting behind the Safety Car and Monaco.
+Q: How many cars get knocked out in Q1?
+   want B2.4.2 six | ctx B2.4.3 B2.4.2 B2.2.3 | 9342 ms
+   A: Five cars get knocked out in Q1 if 20 cars are eligible.
+Q: How long does SQ1 last?
+   want B2.2.2 twelve | ctx B2.2.1 B2.2.2 B6.3.9 | 9832 ms
+   A: SQ1 lasts for the first twelve (12) minutes.
+Q: What percentage of the race distance must a car complete to be classified?
+   want B2.5.5/B2.3.5 90% | ctx B2.5.5 A2.2.1 B2.3.5 | 12843 ms
+   A: To be classified, a car must cover less than 90% of the number of laps covered by the winner (rounded down to the nearest whole number of laps).
+Q: Which drivers have to attend the podium ceremony?
+   want B10.2.1/B4 1st, 2nd and 3rd | ctx B10.2.1 B10.2.2 B10.2.3 | 6547 ms
+   A: Drivers finishing the Race in 1st, 2nd, and 3rd positions must attend the podium ceremony.
+Q: How long after the podium must drivers be available for interviews?
+   want B10.2.1 one and a half | ctx B10.2.1 B10.1.2 B4 | 14134 ms
+   A: Drivers must be available for one and a half (1.5) hours for television interviews and the press conference immediately after the podium ceremony ends, which is within 1 hour and fifteen (15) minutes of the end of FP2.
+Q: How many compounds of dry tyres must be used in the race?
+   want B6.3.6 two | ctx B6.3.6 B6.3.4 B6.3.10 | 10545 ms
+   A: At least two (2) different specifications of dry-weather tyres must be used during the race.
+Q: What is the penalty for not using two different tyre compounds?
+   want B6.3.6 disqualification | ctx B6.3.6 B6.3.1 B6.3.7 | 10406 ms
+   A: A Stop-and-Go Penalty will be imposed on any driver who does not use at least two different tyre compounds during the Race.
+Q: How many sets of soft tyres does a driver get?
+   want B6.2.4  | ctx B6.2.4 B6.3.4 B6.3.9 | 11097 ms
+   A: [B6.3.9] During an Alternative Format Competition, a driver gets 5 sets of soft tyres.
+Q: How quickly can a car be refuelled?
+   want B1.5.9 0.8 litres per second | ctx B1.5.9 B5.15.2 B5.15.2 | 12591 ms
+   A: A F1 Car may be refuelled no faster than 0.8 litres per second.
+Q: Can the driver stay in the car while it's being refuelled?
+   want B1.5.9 engine must be stopped | ctx B1.5.9 B1.8.8 B5.15.3 | 12359 ms
+   A: Yes, according to rule [B1.9], the driver may remain in their F1 Car throughout refuelling, but the engine must be stopped.
+Q: What penalty does a driver get for entering a closed pit lane during the race?
+   want B1.6.4 Stop-and-Go | ctx B1.6.4 B1.9.5 B1.6.3 | 13417 ms
+   A: A driver who enters a closed pit lane during the race during a TTCS receives a 10-second time penalty ("10-Second Penalty").
+Q: When does the safety car come back into the pits?
+   want B5.13.5/B5.13.6  | ctx B5.13.5 B5.13.6 B5.13.8 | 11438 ms
+   A: The Safety Car returns to the pits at the end of the following lap when the Race Director considers it necessary, as stated in [B5.13.6].
+Q: When can lapped cars overtake the safety car?
+   want B5.13.4  | ctx B5.13.5 B5.15.3 B5.6.4 | 14227 ms
+   A: Lapped cars may overtake the safety car only if they are delayed with an obvious problem and the Safety Car message "LAPPED CARS MAY NOW OVERTAKE" has been sent to all competitors, according to [B5.13.4c].
+Q: What happens to overtake mode when the safety car is out?
+   want B7.2.2 disabled | ctx B7.2.2 B5.15.3 B7.2.4 | 12194 ms
+   A: When the safety car is out, overtake is disabled according to [B7.2.2] and [B7.2.4].
+Q: When is overtake mode enabled after the start?
+   want B7.2.2 Detection Line | ctx B7.2.2 B7.2.4 B7.2.3 | 10196 ms
+   A: Overtake is enabled after the start of any LTCS [B7.2.2].
+Q: What must drivers wear in the car?
+   want B1.8.2 flame-resistant clothing | ctx B1.8.2 B1.5.10 B9.1.1 | 8339 ms
+   A: Drivers must always wear flame-resistant clothing, helmets, and Frontal Head Restraints (FHR) specified in the ISC [B1.8.2].
+Q: What counts as a false start?
+   want B5.11.1  | ctx B5.11.1 B5.8.2 B5.8.1 | 14100 ms
+   A: According to [B5.11.1], a false start occurs during any standing start or standing start resumption when all cars must be stationary in their allocated grid position after the third red light is illuminated and before the start signal is given.
+Q: What happens if the start is delayed?
+   want B5.4.1 orange lights | ctx B5.4.1 B5.4.2 B5.6.4 | 11343 ms
+   A: If the start is delayed, the orange lights on the start gantry will be illuminated and a "DELAYED START" message displayed, and drivers will receive a message saying "DELAYED START" to all competitors. The starting procedure will then begin again at the ten-minute signal.
+Q: When is a heat hazard declared?
+   want B1.5.10 31.0°C | ctx B1.5.10 B2 B5.14.4 | 16154 ms
+   A: A heat hazard is declared if the Official Weather Service predicts that the Heat Index will be greater than 31.0°C at some time during the Sprint or the Race at a Competition, or at the sole discretion of the Race Director [B1.5.10].
+Q: Can teams work on the cars during a red flag?
+   want B5.14.4  | ctx B4.1.2 B5.14.2 B4.2.2 | 16027 ms
+   A: No, according to the rules, teams cannot work on the cars during a red flag as stated in [B4.1.2] when the signal is given to stop all F1 Cars, they must immediately reduce speed and proceed slowly back to the Pit Lane.
+Q: Who decides whether a driver gets penalised for a crash?
+   want B1.9.3 stewards | ctx B1.9.3 B1.9.2 B1.9.4 | 7820 ms
+   A: The stewards decide whether any driver involved in an Incident should be penalised.
+Q: How is a 5 second penalty served?
+   want B1.9.6  | ctx B1.9.6 B1.9.6 B1.9.6 | 15046 ms
+   A: A 5-second penalty is served by adding five seconds to the driver's elapsed time if they are unable to restart their engine unaided after stopping. [B1.9.6]
+Q: When are team staff not allowed at the circuit?
+   want B9.5.1  | ctx B9.5.1 B9.5.2 B9.4.1 | 16098 ms
+   A: Team staff are not allowed at the circuit during the Restricted Period One, which starts 42 hours before FP1 and ends 29 hours before FP1, and Restricted Period Two, which starts 18 hours before FP1 and ends 4 hours before FP1.
+Q: Where do pit lane starters wait before the race?
+   want B5.3.1 Fast Lane | ctx B5.3.1 B5.3.2 B5.2.2 | 8432 ms
+   A: Pit Lane starters must stop in a line in the Fast Lane before the Pit Lane exit is closed before the scheduled start of the formation lap.
+Q: How is the grid decided if qualifying is cancelled?
+   want B2.5.4 Drivers’ Championship classification | ctx B2.4.1 B2.5.4 B2.2.1 | 16345 ms
+   A: If qualifying is cancelled, the grid for the Race will be defined based upon the Drivers’ Championship classification. [B2.5.4b] states that in such a circumstance, the procedure defined in Article B2.5.4b shall be applied using the Drivers’ Championship classification of each driver instead of their Qualifying classification, all drivers shall be considered to be classified.
+Q: Can drivers use DRS in low grip conditions?
+   want B7.1.2 partial activation | ctx B7.1.2 B7.2.1 B1.5.11 | 16621 ms
+   A: [B7.2.1] General Provisions & Principles [B7.1.2] states that in Low Grip Conditions, only partial activation of the Driver Adjustable Bodywork is allowed, but the rules do not explicitly state if DRS can be used under these conditions. Therefore, based solely on the provided rules, it is not explicitly stated whether drivers can use DRS in low grip conditions.
+Q: Do cars get weighed after qualifying?
+   want B3.2.1  | ctx B3.2.1 B3.2.1 B3.2.2 | 8780 ms
+   A: Yes, cars get weighed after qualifying according to rule [B3.2.1] [B3.2.1].
+Q: Can cars be kept warm while they're sealed overnight?
+   want B3.4.4 devices to keep them warm | ctx B3.4.4 B8.2.9 B3.3.3 | 11310 ms
+   A: Yes, according to rule [B3.4.4], F1 Cars can be fitted with devices to keep them warm while sealed. However, the specifics of warming are not detailed in the provided rules.
+Q: Does a rookie engine manufacturer get extra engines?
+   want B8.2.3 additional unit | ctx A7 A7 A3.6.1 | 10178 ms
+   A: Not covered in these rules.
+Q: What do drivers have to do under a virtual safety car?
+   want B5.12.2  | ctx B5.12.5 B5.13.2 B5.1.7 | 10048 ms
+   A: Under a virtual safety car, drivers must complete each lap while the VSC procedure is in use during a TTCS, as stated in [B5.12.5].
+Q: How many points for a 3rd place finish in the grand prix?
+   want A2.2.1 15 | ctx A2.2.1 A2.2.1 A2.2.2 | 11483 ms
+   A: According to [A2.2.1], a 3rd place finish in the Grand Prix awards 15 championship points.
+Q: How many points does the race winner get?
+   want A2.2.1 25 | ctx A2.2.1 A2.2.1 A2.2.1 | 11060 ms
+   A: The race winner gets 25 points according to [A2.2.1] Rule extract [1].
+Q: How many points for winning a sprint?
+   want A2.2.2 8 | ctx A2.2.2 A2.2.2 A2.2.1 | 15708 ms
+   A: For a Sprint, the points awarded are 8 for 1st place, 7 for 2nd place, 6 for 3rd place, 5 for 4th place, 4 for 5th place, 3 for 6th place, 2 for 7th place, and 1 for 8th place.
+Q: How many points for each finishing position?
+   want A2.2.1/A2.2.2  | ctx A2.2.1 A2.2.2 A2.2.1 | 18884 ms
+   A: - 1st place: 25 points - 2nd place: 18 points - 3rd place: 15 points - 4th place: 12 points - 5th place: 10 points - 6th place: 8 points - 7th place: 6 points - 8th place: 4 points - 9th place: 2 points
+Q: What happens if two drivers finish the championship tied on points?
+   want A2.1.4 greatest number of first places | ctx A2.2.1 A2.2.2 A2.1.4 | 13633 ms
+   A: If two drivers finish the championship tied on points, the higher place in the Championship shall be awarded to the driver who has scored the greatest number of first places in a race.
+Q: Who gets car number 1?
+   want A2.4.2 reigning World Champion | ctx A2.4.2 A2.4.6 A2.4.1 | 6540 ms
+   A: The reigning World Champion Driver gets car number 1.
+Q: Which car number is not allowed?
+   want A2.4.5 17 | ctx B11.7.1 B11.6.1 A2.4.3 | 13099 ms
+   A: The FIA rules state that a Competitor cannot permanently forfeit their Competition Number by not participating in a Competition for two consecutive Championships; thus, the Competition Number of the driver who has not participated in a Competition for two consecutive Championships is not explicitly mentioned but can be inferred as the number of the last Championship season they did not compete in. However, the rules specifically state that a Driver forfeits their Competition Number by confirming this decision in writing to
+Q: What is the maximum number of races in a season?
+   want A2.1.2 24 | ctx A2.1.2 B1.7.1 A2.1.4 | 4761 ms
+   A: The maximum number of Competitions in the Championship is 24.
+Q: How many cars can each team enter?
+   want A2.1.3 two | ctx A2.1.3 A3.1.4 A3.1.3 | 8125 ms
+   A: No more than 24 F1 Cars may participate in the Championship, with two F1 Cars entered by each F1 Team.
