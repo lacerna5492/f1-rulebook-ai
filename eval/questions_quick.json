@@ -1,0 +1,200 @@
+[
+ {
+  "q": "How fast can drivers go in the pit lane?",
+  "a": [
+   "B1.6.3"
+  ],
+  "ans": "80km/h"
+ },
+ {
+  "q": "How many power units does each driver get for the season?",
+  "a": [
+   "B8.2.2"
+  ],
+  "ans": "3"
+ },
+ {
+  "q": "How many turbochargers can a driver use?",
+  "a": [
+   "B8.2.2"
+  ],
+  "ans": "3"
+ },
+ {
+  "q": "How long is a Grand Prix allowed to last?",
+  "a": [
+   "B2.5.3"
+  ],
+  "ans": "two"
+ },
+ {
+  "q": "How far is a sprint race?",
+  "a": [
+   "B2.3.2"
+  ],
+  "ans": "100km"
+ },
+ {
+  "q": "How many cars get knocked out in Q1?",
+  "a": [
+   "B2.4.2"
+  ],
+  "ans": "six"
+ },
+ {
+  "q": "What percentage of the race distance must a car complete to be classified?",
+  "a": [
+   "B2.5.5",
+   "B2.3.5"
+  ],
+  "ans": "90%"
+ },
+ {
+  "q": "What is the penalty for not using two different tyre compounds?",
+  "a": [
+   "B6.3.6"
+  ],
+  "ans": "disqualification"
+ },
+ {
+  "q": "How many sets of soft tyres does a driver get?",
+  "a": [
+   "B6.2.4"
+  ],
+  "ans": null
+ },
+ {
+  "q": "What penalty does a driver get for entering a closed pit lane during the race?",
+  "a": [
+   "B1.6.4"
+  ],
+  "ans": "Stop-and-Go"
+ },
+ {
+  "q": "When is overtake mode enabled after the start?",
+  "a": [
+   "B7.2.2"
+  ],
+  "ans": "Detection Line"
+ },
+ {
+  "q": "What happens if the start is delayed?",
+  "a": [
+   "B5.4.1"
+  ],
+  "ans": "orange lights"
+ },
+ {
+  "q": "Can teams work on the cars during a red flag?",
+  "a": [
+   "B5.14.4"
+  ],
+  "ans": null
+ },
+ {
+  "q": "How is a 5 second penalty served?",
+  "a": [
+   "B1.9.6"
+  ],
+  "ans": null
+ },
+ {
+  "q": "How is the grid decided if qualifying is cancelled?",
+  "a": [
+   "B2.5.4"
+  ],
+  "ans": "Drivers\u2019 Championship classification"
+ },
+ {
+  "q": "Can drivers use DRS in low grip conditions?",
+  "a": [
+   "B7.1.2"
+  ],
+  "ans": "partial activation"
+ },
+ {
+  "q": "Can cars be kept warm while they're sealed overnight?",
+  "a": [
+   "B3.4.4"
+  ],
+  "ans": "devices to keep them warm"
+ },
+ {
+  "q": "What do drivers have to do under a virtual safety car?",
+  "a": [
+   "B5.12.2"
+  ],
+  "ans": null
+ },
+ {
+  "q": "How many points for a 3rd place finish in the grand prix?",
+  "a": [
+   "A2.2.1"
+  ],
+  "ans": "15"
+ },
+ {
+  "q": "How many points does the race winner get?",
+  "a": [
+   "A2.2.1"
+  ],
+  "ans": "25"
+ },
+ {
+  "q": "How many points for each finishing position?",
+  "a": [
+   "A2.2.1",
+   "A2.2.2"
+  ],
+  "ans": null
+ },
+ {
+  "q": "Who gets car number 1?",
+  "a": [
+   "A2.4.2"
+  ],
+  "ans": "reigning World Champion"
+ },
+ {
+  "q": "Which car number is not allowed?",
+  "a": [
+   "A2.4.5"
+  ],
+  "ans": "17"
+ },
+ {
+  "q": "Can a race be cancelled if not enough cars show up?",
+  "a": [
+   "A2.5.2"
+  ],
+  "ans": "fewer than 12"
+ },
+ {
+  "q": "How long does the FIA have to prosecute a rule breach?",
+  "a": [
+   "A7.9.1"
+  ],
+  "ans": "five years"
+ },
+ {
+  "q": "Is political advertising allowed on the cars?",
+  "a": [
+   "A2.3.3"
+  ],
+  "ans": "political or religious"
+ },
+ {
+  "q": "How many reserve drivers can be used?",
+  "a": [
+   "B1.7.1",
+   "B1.7.3"
+  ],
+  "ans": null
+ },
+ {
+  "q": "Who won the 2025 championship?",
+  "a": [],
+  "ans": null,
+  "none": true
+ }
+]
