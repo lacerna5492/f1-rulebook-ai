@@ -3,7 +3,8 @@
   publish = "site"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
+  NPM_FLAGS = "--ignore-scripts"   # skip onnxruntime-node GPU downloads; the site only needs the browser files
 
 # Models and runtime never change for a given build, so let browsers cache them
 [[headers]]
